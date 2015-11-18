@@ -27,36 +27,22 @@ public class Solver{
 	}
 	
     }
-    // accessor
+    // assessor
     public byte[][] getGrid(){return grid;}
     
-    /***************************************************************
-     *
-     * This is the main algorithm that uses back tracking to solve the Sudoku puzzle
-     * We start at the root cell (the first empy cell) 
-     *
-     *
-     *
-     *
-     *
-     ***************************************************************/
-    
+    //User methods
+
+    //this is the function that solves the puzzle. Note: this function modifies the grid field.
     public boolean solve()
     {
-
 	int[] start = getNextEmptyCell(0,0);
 	return findSolution(start[0], start[1]);
-
 	
     }
-
-
-
 
     private boolean findSolution(int r, int c)
     {
 	byte[] choices = {1,2,3,4,5,6,7,8,9};
-
 
 	for (byte i: choices){
 	    if (isValPossible(i,r,c))
@@ -74,8 +60,7 @@ public class Solver{
 		}
 	}
 	return false;
-    }
-         
+    }         
     // returns the next empty cell found after the one specified
     private int[] getNextEmptyCell(int r, int c)
     {
@@ -91,11 +76,6 @@ public class Solver{
 	return null;
     }
 
-
-
-
-     
-    }
 // helper functions used by findSolution.
 //returns true only if that value may be placed in that cell
     private  Boolean isValPossible(byte value, int r, int c)
@@ -138,10 +118,4 @@ public class Solver{
 	}
 	return result;
     }
-
-
-
-
-
-
 }
