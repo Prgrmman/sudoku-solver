@@ -1,5 +1,5 @@
-all: Solver.java Tester.java DLinkedList.java
-	javac Solver.java Tester.java DLinkedList.java
+all: Solver.java Tester.java
+	javac Solver.java Tester.java
 
 test: all
 	java Tester < test.txt
