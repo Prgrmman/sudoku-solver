@@ -11,9 +11,9 @@ public class Tester{
 	while(in.hasNextInt() && i < 81)
 	    nums[i++] = (byte)in.nextInt();
 
-	// a test of our doubly linked list class
-	DLinkedList<Integer> list = new DLinkedList(new Integer(5));
-       	list.append(new Integer(4));
+	
+	
+       	
 	
 	Solver solver = new Solver(nums);
 	System.out.println("Printing our puzzle");
