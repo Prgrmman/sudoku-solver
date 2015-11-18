@@ -1,10 +1,15 @@
-
+/*
+* This class implements the code that will solve our sudoku puzzle
+* Uses the following objects:
+* ->
+*
+*/
 
 public class Solver{
-    public static void main(String args[])
-    {
-	System.out.println("Hello World\n");
-    }
+    
+    //do something    
+
+
 
 
 
