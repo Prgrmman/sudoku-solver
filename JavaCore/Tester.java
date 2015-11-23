@@ -21,6 +21,18 @@ public class Tester{
 
 	System.out.println("Is there a solution: " +solver.solve());
 	System.out.println(solver.toString());
+
+	// print out the locations of the orignal empty cells
+
+/*	Point[] empty = solver.getEmptyCells();
+	for (Point p : empty){
+	    int row, col,val;
+	    row = p.getRow();
+	    col = p.getCol();
+	    val = solver.getGrid()[row][col];
+	    System.out.println("row: " + row +" col: "+ col +" value "+ val);
+	}
+*/	
 	System.out.println("End of program");
 	
     

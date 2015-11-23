@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /*
 * This class implements the code that will solve our Sudoku puzzle
 * Uses the following objects:
@@ -9,12 +11,16 @@
 public class Solver{
     
     // the puzzle board
-    private byte[][] grid;    
+    private byte[][] grid;
+    private ArrayList<Point> emptyCells; //storing locations of initial empty cells...might be useful later
     
     //constructor
     // if we don't have a full puzzle, then we crash
     public Solver(byte[] nums){
 	grid = new byte[9][9];
+	emptyCells = new ArrayList<Point>();
+	
+	
 	if (nums.length != 81)
 	    {
 		System.out.println("Error making puzzle: exiting now");
@@ -22,36 +28,41 @@ public class Solver{
 	    }
 	int i = 0;
 	for (int r = 0; r < 9; r++){
-	    for (int c = 0; c < 9; c++)
-		grid[r][c] = nums[i++];
+	    for (int c = 0; c < 9; c++){
+		grid[r][c] = nums[i];
+		if (nums[i] == 0)
+		    emptyCells.add(new Point(r,c));
+		i++;
+		
+	    }
 	}
-	
     }
     // assessor
     public byte[][] getGrid(){return grid;}
+    public ArrayList<Point> getEmptyCells(){return emptyCells;}
     
     //User methods
 
     //this is the function that solves the puzzle. Note: this function modifies the grid field.
     public boolean solve()
     {
-	int[] start = getNextEmptyCell(0,0);
-	return findSolution(start[0], start[1]);
+	Point start = getNextEmptyCell(0,0);
+	return findSolution(start.getRow(), start.getCol());
 	
     }
 
     private boolean findSolution(int r, int c)
     {
-	byte[] choices = {1,2,3,4,5,6,7,8,9};
 
-	for (byte i: choices){
+	//scan through choices 1-9
+	for (byte i = 1; i <= 9; i++){
 	    if (isValPossible(i,r,c))
 		{
 		    grid[r][c] = i;
-		   int[]  next = getNextEmptyCell(r,c);
+		   Point next = getNextEmptyCell(r,c);
 		    if (next == null)
 			return true;
-		    if (!findSolution(next[0],next[1]))
+		    if (!findSolution(next.getRow(),next.getCol()))
 			{
 			    grid[r][c] = 0;
 			    continue;
@@ -62,11 +73,11 @@ public class Solver{
 	return false;
     }         
     // returns the next empty cell found after the one specified
-    private int[] getNextEmptyCell(int r, int c)
+    private Point getNextEmptyCell(int r, int c)
     {
-	while( r < 9 && c < 9){
+	while( r < 9){
 	    if (grid[r][c] == 0)
-		return new int[]{r,c};
+		return new Point(r,c);
 	    c ++;
 	    if (c == 9){
 		    c = 0;
