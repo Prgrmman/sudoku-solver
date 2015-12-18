@@ -66,10 +66,20 @@ $("#gridSpace").click(function(e){
 
 // event for keypress
 $(document).ready(function(){
+    $("body").keydown(function(e){
+     //   alert(e.which-48);
+	var key = e.which;
+	if (key ==9)
+	    solve();
+    }
+});
+		      
+
+$(document).ready(function(){
     $("body").keyup(function(e){
      //   alert(e.which-48);
 	var key = e.which - 48;
-	alert(key);
+	
 	switch(key){
 	    case -35:
 	    if (!isSolved) 
@@ -99,7 +109,7 @@ $(document).ready(function(){
 
 
 	
-	//if (key <= 9 && key > 0)
+	if (key <= 9 && key > 0)
 	    board.fillCell(key);
     });
 });
