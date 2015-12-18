@@ -81,8 +81,13 @@ $(document).ready(function(){
      //   alert(e.which-48);
 	var key = e.which;
 	if (key ==9){
-	    solve();
+	    if (!isSolved)
+		solve();
+	    else{
+		isSolved= false;
+		init();
 	   
+		}
 	}
     });
 
