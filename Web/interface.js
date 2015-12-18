@@ -32,6 +32,16 @@ $('body').on('contextmenu', '#gridSpace', function(e){ return false; });
  Event listeners and whaterver not
 **********************************/
 
+$(document).keydown(function (e) 
+{
+    var keycode1 = (e.keyCode ? e.keyCode : e.which);
+    if (keycode1 == 0 || keycode1 == 9) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+
+
 // update relative mouse postiion if mouse moves inside our canvas
 $("#gridSpace").mousemove(function(e){
    var parentOffset = $(this).parent().offset(); 
@@ -66,12 +76,13 @@ $("#gridSpace").click(function(e){
 
 // event for keypress
 $(document).ready(function(){
+     $("#mobile").focus();
     $("body").keydown(function(e){
      //   alert(e.which-48);
 	var key = e.which;
 	if (key ==9){
 	    solve();
-	    $("#mobile").focus();
+	   
 	}
     });
 
@@ -82,9 +93,9 @@ $(document).ready(function(){
     $("body").keyup(function(e){
      //   alert(e.which-48);
 	var key = e.which - 48;
-	
-	switch(key){
-	    case -35:
+	$("#mobile").focus();
+	switch(key){ 
+	   case -35:
 	    if (!isSolved) 
 		solve();
 	    else{
@@ -111,7 +122,7 @@ $(document).ready(function(){
 	}
 
 
-	
+
 	if (key <= 9 && key > 0)
 	    board.fillCell(key);
     });
