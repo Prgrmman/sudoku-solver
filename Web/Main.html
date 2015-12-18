@@ -1,14 +1,50 @@
 <!--This is my web page implementation of my Sudoku Solver-->
+<!--I'm using the BonsaiJS graphics library. https://bonsaijs.org/ -->
 
 
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="myStyleSheet.css">
+<script type="text/javascript" src="http://code.jquery.com/jquery.js"></script>
 <title>Sudoku Solver</title>
+<script src ="solver.js"> </script>
+<script type="text/javasript" src="solver.js"></script>
+
+
+
+<!-- This is the code that solves the puzzle using the solver.js file -->
+
+
+
+
 </head>
 
 
 <body>
-<p> Hello World </p>
+
+ 
+<div id="page">
+   <canvas id="gridSpace" width="800" height="1000" style="border:1px solid #d3d3d3;"></canvas>
+
+</div>
+
+<script src="interface.js"></script>
+<script>
+  init();
+  main();
+</script>
+
+
+
+
+
+
+<div id="choiceBox">
+  <p> This is where the number tiles will live </p>
+</div>
+ 
+
+
 </body>
 
 
