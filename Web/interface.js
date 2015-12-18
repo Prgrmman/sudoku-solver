@@ -99,7 +99,7 @@ $(document).ready(function(){
 
 
 	
-	if (key <= 9 && key > 0)
+	//if (key <= 9 && key > 0)
 	    board.fillCell(key);
     });
 });
