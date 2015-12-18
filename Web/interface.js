@@ -57,6 +57,7 @@ $("#gridSpace").click(function(e){
     var tile; // contains the current tile in the index of our list
     board.setMouseCell();
     board.alpha = 0.99;
+     $("#mobile").focus();
     // alert("Clicked cell ("+board.x+" ," +board.y+")");
   
   
