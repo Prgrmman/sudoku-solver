@@ -1,6 +1,7 @@
 all: Solver.class Tester.class Point.class
 
-test: Solver.class Tester.class Point.class
+
+test: all
 	java Tester < test.txt
 
 
@@ -15,4 +16,5 @@ Point.class: Point.java
 
 clean:
 
-	rm *.class
+	-rm *.class
+	echo Hello

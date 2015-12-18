@@ -38,7 +38,7 @@ $("#gridSpace").mousemove(function(e){
    //or $(this).offset(); if you really just want the current element's offset
     relX = e.pageX - parentOffset.left;
     relY = e.pageY - parentOffset.top;
-    $("#choiceBox").html("x: "+relX +" y: "+relY);
+    
   //  board.getMouseCell();
    
 
