@@ -69,7 +69,7 @@ $(document).ready(function(){
     $("body").keyup(function(e){
      //   alert(e.which-48);
 	var key = e.which - 48;
-
+	alert(key);
 	switch(key){
 	    case -35:
 	    if (!isSolved) 
