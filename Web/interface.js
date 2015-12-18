@@ -69,8 +69,10 @@ $(document).ready(function(){
     $("body").keydown(function(e){
      //   alert(e.which-48);
 	var key = e.which;
-	if (key ==9)
+	if (key ==9){
 	    solve();
+	    $(this).blur();
+	}
     });
 
 });
