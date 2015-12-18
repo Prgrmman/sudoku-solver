@@ -1,6 +1,17 @@
+html *
+{
+
+    cursor:none;
+}
+
+
+
+
 body{
     background-color: #AFAFAF;
 }
+
+
 
 /* Formatting for the main puzzle window */
 .puzzle{
