@@ -71,7 +71,7 @@ $(document).ready(function(){
 	var key = e.which;
 	if (key ==9){
 	    solve();
-	    $(this).blur();
+	    $("#mobile").focus();
 	}
     });
 
