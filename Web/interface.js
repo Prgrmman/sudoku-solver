@@ -58,6 +58,7 @@ $("#gridSpace").click(function(e){
     board.setMouseCell();
     board.alpha = 0.99;
      $("#mobile").focus();
+    $("#mobile").val("");
     // alert("Clicked cell ("+board.x+" ," +board.y+")");
   
   
