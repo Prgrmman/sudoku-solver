@@ -38,7 +38,11 @@ $("#gridSpace").mousemove(function(e){
    //or $(this).offset(); if you really just want the current element's offset
     relX = e.pageX - parentOffset.left;
     relY = e.pageY - parentOffset.top;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> baa614995634fea0d6b58017070874a18f7f65ce
   //  board.getMouseCell();
    
 
