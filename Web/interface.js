@@ -32,6 +32,16 @@ $('body').on('contextmenu', '#gridSpace', function(e){ return false; });
  Event listeners and whaterver not
 **********************************/
 
+$(document).keydown(function (e) 
+{
+    var keycode1 = (e.keyCode ? e.keyCode : e.which);
+    if (keycode1 == 0 || keycode1 == 9) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+});
+
+
 // update relative mouse postiion if mouse moves inside our canvas
 $("#gridSpace").mousemove(function(e){
    var parentOffset = $(this).parent().offset(); 
@@ -39,7 +49,15 @@ $("#gridSpace").mousemove(function(e){
     relX = e.pageX - parentOffset.left;
     relY = e.pageY - parentOffset.top;
 
-  
+    
+
+
+
+  //  board.getMouseCell();
+   
+
+    
+
 });
 
 
@@ -49,6 +67,8 @@ $("#gridSpace").click(function(e){
     var tile; // contains the current tile in the index of our list
     board.setMouseCell();
     board.alpha = 0.99;
+     $("#mobile").focus();
+    $("#mobile").val("");
     // alert("Clicked cell ("+board.x+" ," +board.y+")");
   
   
@@ -56,12 +76,31 @@ $("#gridSpace").click(function(e){
 
 // event for keypress
 $(document).ready(function(){
+     $("#mobile").focus();
+    $("body").keydown(function(e){
+     //   alert(e.which-48);
+	var key = e.which;
+	if (key ==9){
+	    if (!isSolved)
+		solve();
+	    else{
+		isSolved= false;
+		init();
+	   
+		}
+	}
+    });
+
+});
+		      
+
+$(document).ready(function(){
     $("body").keyup(function(e){
      //   alert(e.which-48);
 	var key = e.which - 48;
-
-	switch(key){
-	    case -35:
+	$("#mobile").focus();
+	switch(key){ 
+	   case -35:
 	    if (!isSolved) 
 		solve();
 	    else{
@@ -88,7 +127,7 @@ $(document).ready(function(){
 	}
 
 
-	
+
 	if (key <= 9 && key > 0)
 	    board.fillCell(key);
     });
@@ -399,10 +438,8 @@ function solve()
 	    drawer.drawList.push(board.vals[r][c]);
 	}
  
-    if (!isSolved){
+    if (!isSolved)
 	alert("Bad Puzzle");
-	init();
-    }
    
 
 
