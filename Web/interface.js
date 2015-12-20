@@ -39,15 +39,7 @@ $("#gridSpace").mousemove(function(e){
     relX = e.pageX - parentOffset.left;
     relY = e.pageY - parentOffset.top;
 
-    
-
-
-
-  //  board.getMouseCell();
-   
-
-    
-
+  
 });
 
 
@@ -407,8 +399,10 @@ function solve()
 	    drawer.drawList.push(board.vals[r][c]);
 	}
  
-    if (!isSolved)
+    if (!isSolved){
 	alert("Bad Puzzle");
+	init();
+    }
    
 
 
