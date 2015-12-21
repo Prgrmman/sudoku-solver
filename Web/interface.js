@@ -84,7 +84,6 @@ $(document).ready(function(){
 	    if (!isSolved)
 		solve();
 	    else{
-		isSolved= false;
 		init();
 	   
 		}
@@ -104,12 +103,12 @@ $(document).ready(function(){
 	    if (!isSolved) 
 		solve();
 	    else{
-		isSolved = false;
 		init();
 	    }
 	     break;
 	    case -40:
 	    board.remove();
+	    isSolved = false;
 	     break;
 	    case -11:
 	     board.moveCursor('l');
@@ -155,24 +154,45 @@ function Tile(x,y,num)
 {
     this.X = x;
     this.Y = y;
-    this.isVisible = false;  //this tile is not being dragged by the mouse at first
+ 
     this.num = num;
     this.id = numTiles;
+    this.color = "#000000";
+    
     numTiles ++;
-    this.draw = function(){
+  
+
+}
+Tile.prototype = {
+    draw:function(){
+
 	if(this.isVisible){
 	    this.X = relX;
 	    this.Y = relY;
 	}
-	drawTile(this.X,this.Y,this.num);
-	
 
-    }
+	ctx.fillStyle = this.color;
+	ctx.font = "30px serif";
+	ctx.fillText(this.num,this.X-5,this.Y+5)
+    },
+    setColor: function(c){
+	this.color = c;
+	}
     
-    
-    //need to add lots of functionality
+
+};
+// subclass of Tile
+function SolvedTile(x,y,num){
+    Tile.call(this,x,y,num);
+    this.color = "#ff0000";
 
 }
+SolvedTile.prototype = Object.create(Tile.prototype);
+
+// a colored tile
+
+
+
 /*************************
 DrawList object...
 contains all of the different tiles that I am drawing
@@ -365,14 +385,7 @@ function drawBackground(){
 }
 
 //draws a tile associated with a Tile object
-function drawTile(x,y,number){
-   
 
-    ctx.fillStyle = "#000000";
-    ctx.font = "30px Arial";
-    ctx.fillText(number,x-5,y+5)
-
-}
 
 
 /*************************************/
@@ -381,6 +394,8 @@ function drawTile(x,y,number){
 function init(){
     drawer = new Drawer();
     board = new Board();
+    numTiles = 0;
+    isSolved = false;
 }
 
 
@@ -389,16 +404,6 @@ function init(){
 
 
 
-function spawnRandom(){
-    var x = Math.round(Math.random()*800);
-    var y = Math.round(Math.random()*800);
-    var num = Math.round(Math.random()*9);
-    
-    drawer.drawList.push(new Tile(x,y,num));
-    
-
-
-}
 
 
 function main(){
@@ -430,16 +435,31 @@ function solve()
     
     var solver = new Solver(list);
     isSolved = solver.solve();
-    drawer.drawList = [];
     var grid = solver.getGrid();
-    for (var r = 0; r < 9; r++)
-	for (var c = 0; c < 9; c++){
-	    board.vals[r][c].num = grid[r][c];
-	    drawer.drawList.push(board.vals[r][c]);
-	}
- 
-    if (!isSolved)
+    var tile;
+    
+    if (!isSolved){
 	alert("Bad Puzzle");
+	return;
+    }
+    else{
+   
+	for (var r = 0; r < 9; r++)
+	    for (var c = 0; c < 9; c++){
+		tile = board.vals[r][c];
+		var num = tile.num;
+		tile.num = grid[r][c];
+		if (num == 0){
+		    tile.setColor("#DF2079");
+		    drawer.drawList.push(tile);
+		
+		}
+	
+		
+	    
+	    }
+    }
+    
    
 
 
