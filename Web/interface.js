@@ -45,41 +45,25 @@ $(document).keydown(function (e)
 // update relative mouse postiion if mouse moves inside our canvas
 $("#gridSpace").mousemove(function(e){
    var parentOffset = $(this).parent().offset(); 
-   //or $(this).offset(); if you really just want the current element's offset
     relX = e.pageX - parentOffset.left;
     relY = e.pageY - parentOffset.top;
-
-    
-
-
-
-  //  board.getMouseCell();
-   
-
-    
-
 });
 
-
+// event for mouse click on the board
 $("#gridSpace").click(function(e){
-    
     var list = drawer.drawList; // a reference to the list of tiles in the instance drawer
     var tile; // contains the current tile in the index of our list
     board.setMouseCell();
     board.alpha = 0.99;
      $("#mobile").focus();
     $("#mobile").val("");
-    // alert("Clicked cell ("+board.x+" ," +board.y+")");
-  
-  
 });
 
 // event for keypress
 $(document).ready(function(){
-     $("#mobile").focus();
+    $("#mobile").focus();
     $("body").keydown(function(e){
-     //   alert(e.which-48);
-	var key = e.which;
+    	var key = e.which;
 	if (key ==9){
 	    if (!isSolved)
 		solve();
@@ -91,12 +75,10 @@ $(document).ready(function(){
     });
 
 });
-		      
-
+// events for capturing keypress on computer
 $(document).ready(function(){
     $("body").keyup(function(e){
-     //   alert(e.which-48);
-	var key = e.which - 48;
+    	var key = e.which - 48; // subtracts the key code so the pressing the 1 key inputs a new keycode of 1
 	$("#mobile").focus();
 	switch(key){ 
 	   case -35:
@@ -124,9 +106,6 @@ $(document).ready(function(){
 	     break;
 	    
 	}
-
-
-
 	if (key <= 9 && key > 0)
 	    board.fillCell(key);
     });
@@ -145,8 +124,13 @@ function dist(x1,y1,x2,y2)
 
 
 /***************************
-Definitions of tile sprites and
-tile objects
+Object definitions:
+-> Tile:
+
+-> Drawer
+
+-> Board
+
 
 ****************************/
 
@@ -253,16 +237,11 @@ function Board()
 	this.vals.push(line);
 	line = [];
     }
-
-
     this.remove = function(){
 	var tile = this.vals[this.y][this.x];
 	tile.num = 0;
 	drawer.remove(tile.id);
-
-
     }
-    
     this.moveCursor = function(dir){
 	switch(dir){
 	    case ('l'):
@@ -282,56 +261,38 @@ function Board()
 		 this.y ++;
 	    break;
 	}
-
-
     }
-    
-     this.alpha = 1.0;
-    // flashes the cell overwhich the mouse is over
+    this.alpha = 1.0;
+    // flashes the cell overwhich the mouse clicks
     this.setMouseCell= function(){
 	if (relX > 800 || relY > 800){ // if are mouse is not over a cell...
 	    this.x =null;
 	    this.y = null;
 	    return;
 	}
-	// otherwise, our mouse is hovering over a cell
+	// ...otherwise, our mouse is over a cell
 	this.x = Math.floor(relX / 800 * 9);
 	this.y = Math.floor(relY / 800 * 9);
     }
 
-
     this.fillCell = function (num){
 	var tile; 
-	
-
 	if (this.vals[this.y][this.x].num == 0){
-	   
-	   this.vals[this.y][this.x].num = num;
+	    this.vals[this.y][this.x].num = num;
 	    drawer.drawList.push(this.vals[this.y][this.x]);
-	    
 	}
 	else this.vals[this.y][this.x].num = num;
-
-	
-
-
-
-
-
-
     }
-
     this.drawBoard = function(){
 	drawBackground(); // draw the grid lines
 	// draw our flashing box
 	if (this.x != null && this.y != null){
-	    var cX = Math.floor(this.x / 9 * 800) + 5;
-	    var cY = Math.floor(this.y / 9 * 800) + 5;
+	    var cX = Math.floor(this.x / 9 * 800)+3;
+	    var cY = Math.floor(this.y / 9 * 800)+3;
 	    ctx.beginPath();
 	    ctx.fillStyle = "rgba(200,200,200,"+this.alpha+")";
-	    ctx.fillRect(cX,cY, 80,80);
+	    ctx.fillRect(cX,cY, 84,84);
 	    ctx.closePath();
-	    
 	}
     }
 
@@ -346,15 +307,6 @@ function Board()
 
 
 }
-
-
-/*********************
- Solve Button object
-**********************/
-
-
-
-
 
 
 
@@ -420,6 +372,9 @@ function main(){
 }
 
 var list = [];
+var solver;
+
+
 
 // copies board data and solves puzzle
 function solve()
@@ -431,9 +386,7 @@ function solve()
 	for (var c = 0; c < 9; c++)
 	    list.push(board.vals[r][c].num);
     
-		      
-    
-    var solver = new Solver(list);
+    solver = new Solver(list);
     isSolved = solver.solve();
     var grid = solver.getGrid();
     var tile;
@@ -452,21 +405,9 @@ function solve()
 		if (num == 0){
 		    tile.setColor("#DF2079");
 		    drawer.drawList.push(tile);
-		
 		}
-	
-		
-	    
 	    }
     }
-    
-   
-
-
-
-
-
-
 }
 
 
