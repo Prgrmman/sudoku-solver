@@ -69,7 +69,6 @@ function Solver(nums)
 	// check the rows for duplicates
 	for (var r = 0; r < 9; r++){
 	   var  list = getRow(r).sort();
-	  //  console.log(list);
 	    for (var i = 0; i < list.length - 1; i++)
 		if (list[i] == list[i+1] && list[i] != 0)
 		    return true;
@@ -80,7 +79,6 @@ function Solver(nums)
 	//check cols for dupllicates
 	for (var c = 0;c < 9; c++){
 	   var  list = getCol(c).sort();
-	   // console.log(list);
 	    for (var i = 0; i < list.length - 1; i++)
 		if (list[i] == list[i+1] && list[i] != 0)
 		    return true;
@@ -90,31 +88,32 @@ function Solver(nums)
 
 	for (var i = 0; i < 9; i++){
 	    var list = getBox(i).sort();
-//	    console.log(list);
+
 	    for (var j = 0; j < list.length - 1; j++)
-		if (list[j] == list[j+1] && list[j] != 0)
+		if (list[j] == list[j+1] && list[j] != 0){
+		    
 		    return true;
-
-
-	
-
+		}
 	}
 	return false;
-
     }
 
     // returns row
     function getRow(r){
 	var list = [];
-	for(var c = 0; c < 9; c++)
-	    list.push(grid[r][c]);
+	for(var c = 0; c < 9; c++){
+	    if (grid[r][c] != 0)
+		list.push(grid[r][c]);
+	}
 	return list;
     }
 
     function getCol(c){
 	var list = [];
-	for (var r = 0; r < 9; r++)
-	    list.push(grid[r][c]);
+	for (var r = 0; r < 9; r++){
+	    if (grid[r][c] != 0)
+		list.push(grid[r][c]);
+	}
 	return list;
     }
     function getBox(boxNum){
@@ -123,8 +122,10 @@ function Solver(nums)
 	var r = Math.floor(boxNum /3) * 3;
 
 	for (var i = 0; i < 3; i++)
-	    for (var j = 0; j < 3; j++)
-		list.push(grid[r+i][c+j]);
+	    for (var j = 0; j < 3; j++){
+		if(grid[r+i][c+j] != 0)
+		    list.push(grid[r+i][c+j]);
+	    }
 	return list;
 	    
 	
