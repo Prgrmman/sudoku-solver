@@ -1,0 +1,62 @@
+
+
+
+
+
+body{
+    background-color: #AFAFAF;
+}
+
+
+
+/* Formatting for the main puzzle window */
+.puzzle{
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    z-index: -1;
+    pointer-events:all;
+}
+
+
+/* simple class to align elements to the center*/
+
+#page{
+    margin: auto;
+    width: 800px;
+    height: 800px;
+    border: 3px solid #7D7D7D;
+    postion: relative;
+    Background-color: #f2f2f2;
+/*    cursor: none; */
+}
+
+
+#gridspace {
+  
+    position: absolute;
+    
+    margin-top: 11px;
+    top: 0;
+    z-index: 1;
+    pointer-events:all;
+  
+
+}
+
+#mobile{
+    opacity: 0.0;
+
+
+}
+
+.noselect {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
